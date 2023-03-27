@@ -25,22 +25,21 @@ const liEl = document.body.querySelector('.gallery__item');
 
 ulEl.addEventListener('click', handleClick);
 
-// let imgModalVisible;
-
-function handleClick({ target }) {
-  event.preventDefault();  
-  basicLightbox.create(`
-  <img width="1280" height="840" src="${target.dataset.source}">`).show(basicLightbox);  
-  // imgModalVisible = document.querySelector(".basiclightbox--visible");
-  // console.log(imgModalVisible);
-};
+function handleClick(e) {
+  e.preventDefault();  
+  // console.log(e.target);
+  // console.log(e.currentTarget);
+  // console.log(e.target !== e.currentTarget);
+  if (e.target !== e.currentTarget) {
+  const instance = basicLightbox.create(`
+  <img width="1280" height="840" src="${e.target.dataset.source}">`);
+  instance.show();  
 
 document.addEventListener('keydown', handleModalClose);
 
 function handleModalClose({code}) {  
   if (code === 'Escape') {
-  //   imgModalVisible.remove();
-  // } else {
-    // console.log(code);  
+  instance.close();
   return;}
+};} return;
 };
